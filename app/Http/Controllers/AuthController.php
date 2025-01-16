@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Str;
+use App\Events\NewUserCreated;
 
 class AuthController extends Controller
 {
@@ -32,9 +33,19 @@ class AuthController extends Controller
             'isValidEmail' => User::IS_INVALID_EMAIL,
             'remember_token' => $this->generateRandomCode()
         ]);
-
+        NewUserCreated::dispatch($user);
         return response(['user' => $user, 'message' => 'user created'], 200);
     }
+
+    public function validEmail($token)
+    {
+
+        User::where('remember_token', $token)
+            ->update(['isValidEmail' => User::IS_VALID_EMAIL]);
+
+        return redirect('/app/login');
+    }
+
     function generateRandomCode()
     {
 
