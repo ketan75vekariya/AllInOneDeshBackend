@@ -4,13 +4,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MemberController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/project', [ProjectController::class, 'store']);
-Route::put('/project', [ProjectController::class, 'update']);
-Route::get('/project', [ProjectController::class, 'index']);
-Route::post('/project/pinned',[ProjectController::class, 'pinnedProject']);
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/register','register');
+    Route::post('/login','login');
+});
+
+Route::controller(ProjectController::class)->group(function(){
+    Route::post('/projects','store');
+    Route::put('/projects','update');
+    Route::get('/projects','index');
+    Route::post('/projects/pinned','pinnedProject');
+});
+Route::controller(MemberController::class)->group(function(){
+    Route::post('/members','store');
+    Route::put('/members','update');
+    Route::get('/members','index');
+});
