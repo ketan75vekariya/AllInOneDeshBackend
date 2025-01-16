@@ -25,3 +25,7 @@ Route::controller(MemberController::class)->group(function(){
     Route::put('/members','update');
     Route::get('/members','index');
 });
+Route::controller(TaskController::class)->group(function(){
+    Route::post('/tasks','createTask'); //finish
+   
+});
