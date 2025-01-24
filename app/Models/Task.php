@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\TaskProgress;
+use App\Models\TaskMember;
 use  App\Events\TrackProjectProgress;
-use  App\Events\TrackCompletedAndPendingTask;
+use App\Events\TrackCompletedAndPendingTask;
 
 class Task extends Model
 {

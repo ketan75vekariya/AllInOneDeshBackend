@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use App\Models\Member;
 use App\Models\TaskMember;
+use App\Models\TeamMember;
 
 class TaskController extends Controller
 {
@@ -37,7 +38,7 @@ class TaskController extends Controller
            $members=$fields['memberIds'];
            for($i=0; $i<count($members);$i++){
    
-               TaskMember::create([
+               TeamMember::create([
                    'projectId' => $fields['projectId'],
                    'taskId' => $task->id,
                    'memberId' => $members[$i]
